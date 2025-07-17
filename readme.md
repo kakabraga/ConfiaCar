@@ -15,6 +15,10 @@ Projeto desenvolvido como sistema completo para gerenciar operações de uma con
 ![MySQL](https://skillicons.dev/icons?i=mysql)
 ![Bootstrap](https://skillicons.dev/icons?i=bootstrap)
 ![Docker](https://skillicons.dev/icons?i=docker)
+![HTML](https://skillicons.dev/icons?i=html)
+![CSS](https://skillicons.dev/icons?i=css)
+![JavaScript](https://skillicons.dev/icons?i=js)
+![Vue.js](https://skillicons.dev/icons?i=vue)
 ##
 - **Backend:** PHP 
 - **Banco de Dados:** MySQL 
