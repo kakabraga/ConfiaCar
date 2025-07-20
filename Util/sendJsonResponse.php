@@ -9,7 +9,7 @@
  * @param mixed $data Opcional. Os dados a serem retornados (ex: array de clientes, objeto de cliente).
  * @param int $statusCode Opcional. O código de status HTTP a ser enviado (padrão: 200 OK).
  */
-function sendJsonResponse(bool $success, string $message, $data = null, int $statusCode = 200) {
+function sendJsonResponse(bool $response, string $message, $data = null, int $statusCode = 200) {
     // Define o cabeçalho Content-Type para JSON
     header('Content-Type: application/json');
     // Define o código de status HTTP
@@ -17,7 +17,7 @@ function sendJsonResponse(bool $success, string $message, $data = null, int $sta
 
     // Constrói o array da resposta
     $response = [
-        'success' => $success,
+        'response' => $response,
         'message' => $message,
     ];
 

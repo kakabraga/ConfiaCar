@@ -42,7 +42,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form_cliente" action="#" method="POST">
-                        <input type="hidden" name="id" id="cliente-id" value="">
+                        <input type="hidden" name="idCliente" id="cliente-id" value="">
 
                         <div class="mb-3">
                             <label for="cliente-nome" class="form-label">Nome do Cliente</label>
@@ -61,7 +61,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary btn-sm" id="btn-submit-form" name="enviar">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="btn-submit-form" name="enviar">Salvar</button>
                         </div>
                     </form>
                 </div>

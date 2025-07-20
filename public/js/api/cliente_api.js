@@ -28,7 +28,7 @@ const clienteApi = {
      * @returns {Promise<Object>} - Resposta JSON do servidor.
      */
     async save(data) {
-        const response = await fetch("../../Controller/ClienteController.php?action=save", {
+        const response = await fetch("../Controller/ClienteController.php?action=save", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -37,7 +37,9 @@ const clienteApi = {
             const errorBody = await response.text();
             throw new Error(`Erro HTTP: ${response.status} - ${errorBody}`);
         }
-        return await response.json();
+
+            return await response.json();
+         
     },
 
     /**

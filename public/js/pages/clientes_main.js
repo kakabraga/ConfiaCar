@@ -15,8 +15,6 @@ async function refreshGrid() {
     try {
         // 1. Busca os dados brutos (array de objetos) da API
         const apiResponseData = await clienteApi.fetchClientes(); // Nova função no clienteApi para buscar dados
-        
-        console.log("1. Dados BRUTOS (array de objetos) recebidos do Controller PHP para refresh:", apiResponseData);
 
         if (Array.isArray(apiResponseData)) {
             // 2. Mapeia o array de OBJETOS para um array de ARRAYS
@@ -71,7 +69,7 @@ async function excluirCliente(idCliente, nomeCliente) {
         // Chamada à API para excluir o cliente
         const result = await clienteApi.delete(idCliente);
 
-        if (result.success) {
+        if (result.response) {
             alert("Cliente excluído com sucesso! ✅");
             await refreshGrid(); // Atualiza a tabela após a exclusão
         } else {
@@ -125,7 +123,6 @@ document.addEventListener("DOMContentLoaded", async function () { // Adicionado 
     // 2. Inicializar o Grid.js para exibir a tabela de clientes
     clientesGridInstance = new gridjs.Grid({
         columns: [
-            // A ORDEM AQUI É FUNDAMENTAL E DEVE CORRESPONDER EXATAMENTE AO SEU MAPEO
             { id: "id", name: "Id" },
             { id: "nome", name: "Nome", sort: true },
             { id: "cpf", name: "CPF" },
@@ -133,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async function () { // Adicionado 
             {
                 name: "Ações",
                 formatter: (cell, row) => {
-                    // Acesse os dados da célula usando 'row.cells[index].data'
+                    // Acessa os dados da célula usando 'row.cells[index].data'
                     const idCliente = row.cells[0].data;
                     const nomeCliente = row.cells[1].data;
                     const cpfCliente = row.cells[2].data;
@@ -166,8 +163,8 @@ document.addEventListener("DOMContentLoaded", async function () { // Adicionado 
                 },
             },
         ],
-        // *** AGORA USAMOS 'data' EM VEZ DE 'server' ***
-        data: initialData, // Passa os dados carregados para o Grid.js
+       
+        data: initialData,
         
         search: true, // Habilita a barra de pesquisa (agora no lado do cliente)
         pagination: { limit: 10, summary: true }, // Habilita paginação (agora no lado do cliente)

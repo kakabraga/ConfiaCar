@@ -68,7 +68,7 @@ class ClienteFormModal {
 
         try {
             const result = await this.clienteApi.save(clienteData);
-            if (result.success) {
+            if (result.response) {
                 alert(`Cliente ${this.mode === 'create' ? 'adicionado' : 'atualizado'} com sucesso! ✅`);
                 this.hide(); // Esconde o modal
                 if (this.refreshGridCallback) {
