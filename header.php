@@ -1,8 +1,10 @@
-
+<?php
+include 'globals.php'; 
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php">
-            <img src="../public/img/logo.png" alt="ConfiaCar Logo" width="100" height="60">
+        <a class="navbar-brand" href="index.php">
+           ConfiaCar
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +28,7 @@
                         <i class="bi bi-building"></i> Fornecedor </a>
                     <ul class="dropdown-menu" aria-labelledby="fornecedoresDropdown">
                         <li><h6 class="dropdown-header">Gerenciar Fornecedores</h6></li>
-                        <li><a class="dropdown-item" href="<?= $BASE_URL ?>pages/fornecedores.php">Listar / Cadastrar Fornecedores</a></li>
+                        <li><a class="dropdown-item" href="<?= $BASE_URL ?>fornecedores.php">Listar / Cadastrar Fornecedores</a></li>
                         <li><a class="dropdown-item" href="#">Outra Ação de Fornecedor</a></li>
                     </ul>
                 </li>

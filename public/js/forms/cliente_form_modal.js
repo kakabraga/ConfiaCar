@@ -70,9 +70,9 @@ class ClienteFormModal {
             const result = await this.clienteApi.save(clienteData);
             if (result.response) {
                 alert(`Cliente ${this.mode === 'create' ? 'adicionado' : 'atualizado'} com sucesso! ✅`);
-                this.hide(); // Esconde o modal
+                this.hide();
                 if (this.refreshGridCallback) {
-                    this.refreshGridCallback(); // Atualiza o grid
+                    this.refreshGridCallback();
                 }
             } else {
                 alert(`Erro ao salvar cliente: ${result.message || "Erro desconhecido."}`);

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <?php include "pages/components/header.php"; ?>
+    <?php include "./header.php"; ?>
     <div class="d-flex flex-column min-vh-100">
         <div class="container-fluid flex-grow-1">
             <div class="container py-4 border border-dark">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <?php include 'pages/components/footer.php'; ?>
+        <?php include './footer.php'; ?>
     </div>
 </body>
 

@@ -30,11 +30,7 @@ class ClienteDAO implements ClientesDAOInterface
         $stmt->bindParam(":email", $data->email);
         $resultado = $stmt->execute();
 
-        if ($resultado) {
-            return true;
-        } else {
-            return false;
-        }
+        return $resultado ? true : false;
     }
     public function listCliente()
     {
@@ -60,11 +56,8 @@ class ClienteDAO implements ClientesDAOInterface
         $stmt->bindParam(":email", $data->email);
         $stmt->bindParam(":cpf", $data->cpf);
         $resultado = $stmt->execute();
-        if ($resultado) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return $resultado ? true : false;
     }
     public function del($id)
     {

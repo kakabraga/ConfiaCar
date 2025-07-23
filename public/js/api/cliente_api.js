@@ -1,20 +1,17 @@
 // public/js/api/cliente_api.js
-
+const urlCliente = "../Controller/ClienteController.php?action=";
 const clienteApi = {
     /**
      * Retorna a URL para buscar a lista de clientes. Usado pelo Grid.js.
      * (Mantido caso você mude de ideia ou para referência, mas não será usado no modo `data`)
      */
-    getFetchUrlForGrid() {
-        return "../Controller/ClienteController.php?action=fetch";
-    },
 
     /**
      * **NOVA FUNÇÃO:** Busca todos os clientes do servidor.
      * @returns {Promise<Array<Object>>} - Um array de objetos cliente.
      */
     async fetchClientes() {
-        const response = await fetch("../Controller/ClienteController.php?action=fetch");
+        const response = await fetch(urlCliente + "fetch");
         if (!response.ok) {
             const errorBody = await response.text();
             throw new Error(`Erro HTTP ao buscar clientes: ${response.status} - ${errorBody}`);
@@ -28,7 +25,7 @@ const clienteApi = {
      * @returns {Promise<Object>} - Resposta JSON do servidor.
      */
     async save(data) {
-        const response = await fetch("../Controller/ClienteController.php?action=save", {
+        const response = await fetch(urlCliente + "save", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -48,7 +45,7 @@ const clienteApi = {
      * @returns {Promise<Object>} - Resposta JSON do servidor.
      */
     async delete(idCliente) {
-        const response = await fetch("../Controller/ClienteController.php?action=del", {
+        const response = await fetch(urlCliente + "del", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ idCliente })
@@ -59,4 +56,6 @@ const clienteApi = {
         }
         return await response.json();
     }
+
+    
 };
