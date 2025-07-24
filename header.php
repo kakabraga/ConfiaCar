@@ -1,9 +1,9 @@
 <?php
-include 'globals.php'; 
+require_once 'globals.php'; 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="./index.php">
            ConfiaCar
         </a>
 
@@ -14,10 +14,10 @@ include 'globals.php';
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="clientesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                    <a class="nav-link dropdown-toggle" href="" id="clientesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         <i class="bi bi-person-fill-add"></i> Cliente </a>
                     <ul class="dropdown-menu" aria-labelledby="clientesDropdown">
-                        <li><h6 class="dropdown-header">Gerenciar Clientes</h6></li> <li><a class="dropdown-item" href="pages/clientes.php">Listar / Cadastrar Clientes</a></li>
+                        <li><h6 class="dropdown-header">Gerenciar Clientes</h6></li> <li><a class="dropdown-item" href="<?= $BASE_URL ?>clientes.php">Listar / Cadastrar Clientes</a></li>
                         <li><a class="dropdown-item" href="#">Outra Ação de Cliente</a></li>
                         <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="#">Relatórios de Cliente</a></li>
                     </ul>
@@ -35,15 +35,6 @@ include 'globals.php';
 
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="<?= $BASE_URL ?>index.php"><i class="bi bi-house-fill"></i> Início</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Meu Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a>
                 </li>
             </ul>
         </div>

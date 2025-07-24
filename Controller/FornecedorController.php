@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['ac
     $id_fornecedor = $data['fornecedorId'] ?? null;
     if ($id_fornecedor) {
         // Altere 'del' para o nome correto do seu método de exclusão no DAO, por exemplo 'deleteCliente'
-        $success = $fornecedorDAO->del($id_fornecedor);
-        if ($success) {
+        $result = $fornecedorDAO->del($id_fornecedor);
+        if ($result) {
             sendJsonResponse(true, "Cliente excluído com sucesso.");
         } else {
             sendJsonResponse(false, "Falha ao excluir cliente. ID não encontrado ou erro no banco.");
@@ -38,14 +38,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['ac
     $id_fornecedor = $data['fornecedorId'] ?? null;
     if ($id_fornecedor) {
         // Altere 'del' para o nome correto do seu método de exclusão no DAO, por exemplo 'deleteCliente'
-        $success = $fornecedorDAO->hasFornecimentos($id_fornecedor);
-        echo $success;
-        if ($success) {
-            sendJsonResponse(true, "Cliente tem dependencias.");
+        $result = $fornecedorDAO->hasFornecimentos($id_fornecedor);
+        if ($result) {
+            sendJsonResponse(true, "O fornecedor tem fornecimentos, por isso não pode ser excluído.");
         } else {
-            sendJsonResponse(false, "Falha ao excluir cliente. ID não encontrado ou erro no banco.");
+            sendJsonResponse(false, "O fornecedor não tem fornecimentos.");
         }
     } else {
-        sendJsonResponse(false, "ID do cliente não fornecido para exclusão.");
+        sendJsonResponse(false, "ID do fornecedor não fornecido para verificação de dependencias.");
     }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['action'] === 'dep') {
+    $fornecedores = $fornecedorDAO->listFornecedor();
+    $dados_formatados = [];
+    foreach ($fornecedores as $fornecedor) {
+        $fornecedorId = $fornecedor->id;
+        $hasFornecimentos = $fornecedorDAO->hasFornecimentos($fornecedorId);
+        $fornecedorParaJson = [
+            'id' => $fornecedorId,
+            'nome' => $fornecedor->nome,
+            'email' => $fornecedor->email,
+            'cnpj' => $fornecedor->cnpj,
+            'hasFornecimentos' => $hasFornecimentos
+        ];
+        $dadosFormatados[] = $fornecedorParaJson;
+    }
+    echo json_encode($dadosFormatados);
 }

@@ -43,15 +43,13 @@ const fornecedorApi = {
   //   const response = await fetch(url);
   // },
 
-  async hasFornecimento(fornecedorId) {
-    const response = await fetch(urlFornecedor + "dep", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fornecedorId }),
-    });
-     if (!response.ok) {
+  async hasfornecimento() {
+    const response = await fetch(urlFornecedor + "dep");
+    if (!response.ok) {
       const errorBody = await response.text();
-      throw new Error(`Erro HTTP: ${response.status} - ${errorBody}`);
+      throw new Error(
+        `Erro HTTP ao buscar clientes: ${response.status} - ${errorBody}`
+      );
     }
     return await response.json();
   },

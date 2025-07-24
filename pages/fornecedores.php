@@ -18,21 +18,26 @@
 
 <body>
     <?php include "../header.php"; ?>
-    <div class="d-flex flex-column min-vh-100">
-        <div class="container-fluid flex-grow-1">
-            <div class="container py-4">
-                <div class="card mb-5 border border-dark shadow-lg">
-                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                        <h2 class="text-center text-white"> Gerenciamento de Fornecedores</h2>
-                        <button type="button" class="btn btn-outline-light btn-sm float-end" id="btn-adicionar-Fornecedor">
-                            <i class="bi bi-person-plus-fill me-1"></i> Cadastrar </button>
-                        </button>
+     <div class="container-fluid main-layout-area">
+        <div class="row flex-nowrap h-100">
+            <?php include "components/menu.php"; ?>
+
+            <div class="col py-3 content-area-wrapper">
+                <div class="container py-4">
+                    <div class="card mb-5 border border-dark shadow-lg">
+                        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                            <h2 class="text-center text-white"> Gerenciamento de Fornecedores</h2>
+                            <button type="button" class="btn btn-outline-light btn-sm float-end" id="btn-adicionar-Fornecedor">
+                                <i class="bi bi-person-plus-fill me-1"></i> Cadastrar
+                            </button>
+                        </div>
+                        <div id="fornecedor"></div>
                     </div>
-                    <div id="fornecedor"></div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="FornecedorFormModal" tabindex="-1" aria-labelledby="FornecedorFormModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -67,6 +72,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

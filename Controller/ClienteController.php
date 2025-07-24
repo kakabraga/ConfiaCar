@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     $cliente->nome     = $nome;
     $cliente->email    = $email;
     $cliente->cpf      = $cpf;
-    if($id_cliente == null) {
+    if ($id_cliente == null) {
         $success = $clienteDAO->create($cliente);
     } else {
         $success = $clienteDAO->update($cliente);
