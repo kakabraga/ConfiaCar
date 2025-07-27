@@ -44,7 +44,6 @@
     <div class="container-fluid main-layout-area">
         <div class="row flex-nowrap">
             <?php include "pages/components/menu.php"; ?>
-
             <div class="col py-3">
                 <div class="container py-4 border border-dark">
                     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" >
