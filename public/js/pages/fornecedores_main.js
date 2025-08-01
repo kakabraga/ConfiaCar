@@ -1,5 +1,47 @@
-// Certifique-se de que fornecedorApi esteja definido e acessível (importado ou global)
+let fornecedoresGridInstance;
+let fornecedorFormModalInstance;
 
+async function refreshGrid() {
+  try {
+    // 1. Busca os dados brutos (array de objetos) da API
+    const apiResponseData = await fornecedorApi.fetchFornecedor(); // Nova função no fornecedoreApi para buscar dados
+
+    if (Array.isArray(apiResponseData)) {
+      // 2. Mapeia o array de OBJETOS para um array de ARRAYS
+      const mappedDataForGrid = apiResponseData.map((fornecedor) => [
+        fornecedor.id,
+        fornecedor.nome,
+        fornecedor.cnpj,
+        fornecedor.email,
+        fornecedor.hasFornecimentos,
+      ]);
+      // 3. Atualiza os dados da instância existente do Grid.js
+      if (fornecedoresGridInstance) {
+        fornecedoresGridInstance
+          .updateConfig({
+            data: mappedDataForGrid, // Atualiza a propriedade 'data' diretamente
+          })
+          .forceRender(); // Força a re-renderização do grid
+      } else {
+        console.error("Instância do Grid.js não encontrada para atualização.");
+      }
+    } else {
+      console.error(
+        "Erro no refreshGrid: Resposta inesperada do servidor. Esperado um ARRAY de clientes.",
+        apiResponseData
+      );
+      if (fornecedoresGridInstance) {
+        fornecedoresGridInstance.updateConfig({ data: [] }).forceRender(); // Limpa o grid em caso de erro
+      }
+    }
+  } catch (error) {
+    console.error("Erro ao buscar dados para refresh do Grid:", error);
+    alert("Ocorreu um erro ao atualizar os dados da tabela.");
+    if (fornecedoresGridInstance) {
+      fornecedoresGridInstance.updateConfig({ data: [] }).forceRender(); // Limpa o grid em caso de erro
+    }
+  }
+}
 async function deleteFornecedor(fornecedorId, fornecedorNome) {
   if (
     !confirm(`Tem certeza que deseja excluir o cliente ${fornecedorNome} ?`)
@@ -24,7 +66,18 @@ async function deleteFornecedor(fornecedorId, fornecedorNome) {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // <--- Adicione 'async' aqui!
+  const fornecedorFormModalElement = document.getElementById(
+    "FornecedorFormModal"
+  );
+  if (fornecedorFormModalElement) {
+    fornecedorFormModalInstance = new FornecedorFormModal(
+      "FornecedorFormModal",
+      "form_fornecedor",
+      fornecedorApi,
+      refreshGrid
+    );
+  }
+
   let dados = [];
   try {
     // 1. Use 'await' para esperar a Promise ser resolvida
@@ -58,10 +111,29 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   // ID do div no HTML DEVE ser "fornecedor" (ou mude aqui se for "fornecedores")
-  let fornecedoresGridInstance = new gridjs.Grid({
+   fornecedoresGridInstance = new gridjs.Grid({
     columns: [
       { id: "id", name: "Id" },
-      { id: "nome", name: "Nome" },
+      {
+        id: "nome",
+        name: "Nome",
+        formatter: (cell, row) => {
+          const fornecedorId = row.cells[0].data;
+          const fornecedorNome = row.cells[1].data;
+          return gridjs.h(
+            "a",
+            {
+              href: `fornecimentos.php?id=${fornecedorId}`,
+              target: "__blank",
+              title:
+                "Verificar mais informações sobre o fornecedor: " +
+                fornecedorNome,
+              className: 'link-offset-2 link-dark link-offset-3-hover bg-light-subtle d-block p-2  link-underline-opacity-0 link-underline-opacity-75-hover'
+            },
+            cell
+          );
+        },
+      },
       { id: "cnpj", name: "CNPJ" },
       { id: "email", name: "Email" },
       // Você pode adicionar uma coluna de ações aqui, como fez para clientes/funcionários
@@ -107,15 +179,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             {
               className: "btn btn-sm btn-outline-primary me-2",
               onclick: () =>
-                alert(
-                  fornecedorId +
-                    " " +
-                    fornecedorNome +
-                    " " +
-                    fornecedorCnpj +
-                    " " +
-                    fornecedorEmail
-                ),
+                fornecedorFormModalInstance.show("update", {
+                  id: fornecedorId,
+                  nome: fornecedorNome,
+                  cnpj: fornecedorCnpj,
+                  email: fornecedorEmail,
+                }),
             },
             "Editar"
           );
@@ -128,7 +197,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               href: "./fornecimentos.php?id=" + fornecedorId,
               title: temFornecimentos
                 ? "Verificar fornecimentos de: " + fornecedorNome
-                : fornecedorNome +" não tem fornecimentos",
+                : fornecedorNome + " não tem fornecimentos",
+            target: "__blank"
             },
             "Fornecimentos"
           );
@@ -155,4 +225,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       error: "Ocorreu um erro ao carregar os dados.",
     },
   }).render(document.getElementById("fornecedor")); // <--- Certifique-se que o ID no HTML seja "fornecedor" ou mude aqui.
+    const btnAdicionarFornecedor = document.getElementById("btn-adicionar-fornecedor");
+    if (btnAdicionarFornecedor) {
+        btnAdicionarFornecedor.addEventListener("click", () => {
+            // Abre o modal de formulário no modo de criação (sem dados pré-preenchidos)
+            fornecedorFormModalInstance.show("create");
+        });
+    }
 });

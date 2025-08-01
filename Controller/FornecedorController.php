@@ -19,33 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['ac
     }
     $id_fornecedor = $data['fornecedorId'] ?? null;
     if ($id_fornecedor) {
-        // Altere 'del' para o nome correto do seu método de exclusão no DAO, por exemplo 'deleteCliente'
+        // Altere 'del' para o nome correto do seu método de exclusão no DAO, por exemplo 'deletefornecedor'
         $result = $fornecedorDAO->del($id_fornecedor);
         if ($result) {
-            sendJsonResponse(true, "Cliente excluído com sucesso.");
+            sendJsonResponse(true, "fornecedor excluído com sucesso.");
         } else {
-            sendJsonResponse(false, "Falha ao excluir cliente. ID não encontrado ou erro no banco.");
+            sendJsonResponse(false, "Falha ao excluir fornecedor. ID não encontrado ou erro no banco.");
         }
     } else {
-        sendJsonResponse(false, "ID do cliente não fornecido para exclusão.");
-    }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] == 'dep') {
-    $data = json_decode(file_get_contents('php://input'), true); // Decodifica o JSON do corpo da requisição
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        sendJsonResponse(false, "JSON inválido na requisição.");
-        exit();
-    }
-    $id_fornecedor = $data['fornecedorId'] ?? null;
-    if ($id_fornecedor) {
-        // Altere 'del' para o nome correto do seu método de exclusão no DAO, por exemplo 'deleteCliente'
-        $result = $fornecedorDAO->hasFornecimentos($id_fornecedor);
-        if ($result) {
-            sendJsonResponse(true, "O fornecedor tem fornecimentos, por isso não pode ser excluído.");
-        } else {
-            sendJsonResponse(false, "O fornecedor não tem fornecimentos.");
-        }
-    } else {
-        sendJsonResponse(false, "ID do fornecedor não fornecido para verificação de dependencias.");
+        sendJsonResponse(false, "ID do fornecedor não fornecido para exclusão.");
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['action'] === 'dep') {
     $fornecedores = $fornecedorDAO->listFornecedor();
@@ -63,4 +45,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET'  && isset($_GET['action']) && $_GET['ac
         $dadosFormatados[] = $fornecedorParaJson;
     }
     echo json_encode($dadosFormatados);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST'  && isset($_GET['action']) && $_GET['action'] === 'save') {
+    $data = json_decode(file_get_contents('php://input'), true); // Decodifica o JSON do corpo da requisição
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        sendJsonResponse(false, "JSON inválido na requisição.");
+        exit();
+    }
+
+    $id_fornecedor = $data['id'] ?? null;
+    $fornecedor->id   = $id_fornecedor;
+    $fornecedor->nome = $data['nome'];
+    $fornecedor->cnpj = $data['cnpj'];
+    $fornecedor->email = $data['email'];
+    if ($id_fornecedor == null) {
+        $success = $fornecedorDAO->create($fornecedor);
+    } else {
+        $success = $fornecedorDAO->update($fornecedor);
+    }
+    if ($success) {
+        sendJsonResponse(true, "Fornecedor cadastrado com sucesso.", 200);
+    } else {
+        sendJsonResponse(false, "Falha ao excluir fornecedor. ID não encontrado ou erro no banco.");
+    }
 }

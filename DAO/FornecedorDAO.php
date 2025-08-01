@@ -22,7 +22,7 @@ class FornecedorDAO implements FornecedorDAOInterface
     public function create(Fornecedor $data)
     {
 
-        $stmt = $this->conn->prepare("INSERT INTO tb_fornecedor (nome, cnpj, email) VALUES :nome, cnpj, email");
+        $stmt = $this->conn->prepare("INSERT INTO tb_fornecedor (nome, cnpj, email) VALUES (:nome, :cnpj, :email)");
         $stmt->bindParam(":nome", $data->nome);
         $stmt->bindParam(":cnpj", $data->cnpj);
         $stmt->bindParam(":email", $data->email);
@@ -32,7 +32,7 @@ class FornecedorDAO implements FornecedorDAOInterface
     }
     public function listFornecedor()
     {
-        $stmt = $this->conn->prepare("SELECT id_fornecedor, nome, cnpj, email FROM tb_fornecedor");
+        $stmt = $this->conn->prepare("SELECT id_fornecedor, nome, cnpj, email FROM tb_fornecedor WHERE data_exclusao IS NULL");
         $stmt->execute();
         $result = $stmt->fetchAll();
         $dados = [];
@@ -47,8 +47,8 @@ class FornecedorDAO implements FornecedorDAOInterface
     }
     public function update(Fornecedor $data)
     {
-        $stmt   = $this->conn->prepare("UPDATE tb_fornecedor SET nome = :nome, cpnj = :cnpj, email = :email WHERE id_fornecedor = :id_fornecedor");
-        $stmt->bindParam(":id_fornecedor", $data->id);
+        $stmt   = $this->conn->prepare("UPDATE tb_fornecedor SET nome = :nome, cnpj = :cnpj, email = :email WHERE id_fornecedor = :id");
+        $stmt->bindParam(":id", $data->id);
         $stmt->bindParam(":nome", $data->nome);
         $stmt->bindParam(":cnpj", $data->cnpj);
         $stmt->bindParam(":email", $data->email);
@@ -58,7 +58,7 @@ class FornecedorDAO implements FornecedorDAOInterface
     }
     public function del($id)
     {
-        $stmt = $this->conn->prepare("DELETE FROM tb_fornecedor WHERE id_fornecedor = :id");
+        $stmt = $this->conn->prepare("UPDATE tb_fornecedor SET data_exclusao = NOW() WHERE id_fornecedor = :id");
         $stmt->bindParam(":id", $id);
         $result = $stmt->execute();
         return $result ? true : false;

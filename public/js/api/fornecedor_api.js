@@ -43,6 +43,20 @@ const fornecedorApi = {
   //   const response = await fetch(url);
   // },
 
+  async save(data) {
+    const response = await fetch(urlFornecedor + "save", {
+      method: "POST",
+      header: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Erro HTTP: ${response.status} - ${errorBody}`);
+    }
+
+    return await response.json();
+  },
+
   async hasfornecimento() {
     const response = await fetch(urlFornecedor + "dep");
     if (!response.ok) {
@@ -53,5 +67,4 @@ const fornecedorApi = {
     }
     return await response.json();
   },
-  };
-
+};

@@ -1,5 +1,4 @@
 <?php
-include('../globals.php');
 require_once('../models/Cliente.php');
 
 class ClienteDAO implements ClientesDAOInterface

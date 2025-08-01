@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <?php include "../header.php"; ?>
+    <?php include "components/header.php"; ?>
     <div class="d-flex flex-column min-vh-100">
         <div class="container-fluid flex-grow-1">
             <div class="container py-4">
@@ -75,7 +75,7 @@
     <script src="../public/js/forms/cliente_form_modal.js"></script>
 
     <script src="../public/js/pages/clientes_main.js"></script>
-    <?php include '../footer.php'; ?>
+    <?php include 'components/footer.php'; ?>
 </body>
 
 </html>

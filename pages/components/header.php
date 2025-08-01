@@ -17,7 +17,7 @@ require_once 'globals.php';
                     <a class="nav-link dropdown-toggle" href="" id="clientesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         <i class="bi bi-person-fill-add"></i> Cliente </a>
                     <ul class="dropdown-menu" aria-labelledby="clientesDropdown">
-                        <li><h6 class="dropdown-header">Gerenciar Clientes</h6></li> <li><a class="dropdown-item" href="<?= $BASE_URL ?>clientes.php">Listar / Cadastrar Clientes</a></li>
+                        <li><h6 class="dropdown-header">Gerenciar Clientes</h6></li> <li><a class="dropdown-item" href="<?= $BASE_URL?>clientes.php">Listar / Cadastrar Clientes</a></li>
                         <li><a class="dropdown-item" href="#">Outra Ação de Cliente</a></li>
                         <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="#">Relatórios de Cliente</a></li>
                     </ul>
