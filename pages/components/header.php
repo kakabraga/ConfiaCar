@@ -1,7 +1,7 @@
 <?php
 require_once 'globals.php'; 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="./index.php">
            ConfiaCar

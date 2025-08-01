@@ -2,12 +2,12 @@
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li>
-                <a href="#" class="nav-link px-0 text-white">
+                <a href="./clientes.php" class="nav-link px-0 text-white">
                     <span class="ms-1 d-none d-sm-inline">Clientes</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 text-white">
+                <a href="./fornecedores.php" class="nav-link px-0 text-white">
                     <span class="ms-1 d-none d-sm-inline">Fornecedores</span>
                 </a>
             </li>

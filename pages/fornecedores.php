@@ -20,8 +20,8 @@
 <body>
     <?php include "components/header.php"; ?>
     <div class="container-fluid main-layout-area">
-        <div class="row flex-nowrap h-100">
-            <?php include "components/menu.php"; ?>
+        <div class="row flex-nowrap">
+            <?php include "components/menu_fornecedor.php"; ?>
 
             <div class="col py-3 content-area-wrapper">
                 <div class="container py-4">
