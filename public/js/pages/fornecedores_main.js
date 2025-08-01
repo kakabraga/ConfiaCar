@@ -210,7 +210,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     search: true, // Habilita a barra de pesquisa
     pagination: { limit: 10, summary: true }, // Habilita paginação
     language: {
-      // Tradução básica, se ainda não tiver global
       search: { placeholder: "Pesquisar fornecedores..." },
       pagination: {
         previous: "Anterior",

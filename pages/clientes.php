@@ -18,17 +18,20 @@
 
 <body>
     <?php include "components/header.php"; ?>
-    <div class="d-flex flex-column min-vh-100">
-        <div class="container-fluid flex-grow-1">
-            <div class="container py-4">
-                <div class="card mb-5 border border-dark shadow-lg">
-                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                        <h2 class="text-center text-white"> Gerenciamento de clientes</h2>
-                        <button type="button" class="btn btn-outline-light btn-sm float-end" id="btn-adicionar-cliente">
-                            <i class="bi bi-person-plus-fill me-1"></i> Cadastrar </button>
-                        </button>
+    <div class="container-fluid main-layout-area">
+        <div class="row flex-nowrap">
+            <?php include "components/menu_cliente.php"; ?>
+            <div class="col py-3 content-area-wrapper">
+                <div class="container py-4">
+                    <div class="card mb-5 border border-dark shadow-lg">
+                        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                            <h2 class="text-center text-white"> Gerenciamento de Clientes</h2>
+                            <button type="button" class="btn btn-outline-light btn-sm float-end" id="btn-adicionar-cliente" data-bs-toggle="modal" data-bs-target="#FornecedorFormModal">
+                                <i class="bi bi-person-plus-fill me-1"></i> Cadastrar
+                            </button>
+                        </div>
+                        <div id="cliente"></div>
                     </div>
-                    <div id="cliente"></div>
                 </div>
             </div>
         </div>

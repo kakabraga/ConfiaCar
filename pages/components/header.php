@@ -29,12 +29,9 @@ require_once 'globals.php';
                     <ul class="dropdown-menu" aria-labelledby="fornecedoresDropdown">
                         <li><h6 class="dropdown-header">Gerenciar Fornecedores</h6></li>
                         <li><a class="dropdown-item" href="<?= $BASE_URL ?>fornecedores.php">Listar / Cadastrar Fornecedores</a></li>
-                        <li><a class="dropdown-item" href="#">Outra Ação de Fornecedor</a></li>
+                        <li><a class="dropdown-item" href="<?= $BASE_URL ?>fornecimentos.php">Verificar Fonecimentos</a></li>
+                        <li><a class="dropdown-item" href="<?= $BASE_URL ?>dashboard_fornecedores.php">Dashboard de Fornecedores</a></li>
                     </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="<?= $BASE_URL ?>index.php"><i class="bi bi-house-fill"></i> Início</a>
                 </li>
             </ul>
         </div>
