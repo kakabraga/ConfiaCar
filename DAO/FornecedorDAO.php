@@ -82,4 +82,12 @@ class FornecedorDAO implements FornecedorDAOInterface
         $stmt->execute();
         return $stmt->fetchColumn() > 0 ? true : false;
     }
+    public function totalFornecedor()
+    {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM tb_fornecedor");
+        $stmt->execute();
+        $total = $stmt->fetchColumn();
+
+        return (int) $total;
+    }
 }
