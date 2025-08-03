@@ -1,10 +1,10 @@
 <?php 
 
 Class Fornecedor {
-    public $id;
-    public $nome;
-    public $cnpj;
-    public $email;
+    public int $id;
+    public string $nome;
+    public string $cnpj;
+    public string $email;
 }
 
 interface FornecedorDAOInterface {
@@ -15,4 +15,5 @@ interface FornecedorDAOInterface {
     public function del($id);
     public function FornecedorToArray(Fornecedor $data);
     public function hasFornecimentos($id);
+    public function totalFornecedor();
 }

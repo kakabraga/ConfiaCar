@@ -3,8 +3,8 @@
 class User
 {
 
-    public $id;
-    public $nome;
-    public $email;
-    public $cpf;
+    public int $id;
+    public string $nome;
+    public string $email;
+    public string $cpf;
 }

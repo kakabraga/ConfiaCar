@@ -2,10 +2,10 @@
 
 class Cliente
 {
-    public $id;
-    public $nome;
-    public $email;
-    public $cpf;
+    public int $id;
+    public string$nome;
+    public string $email;
+    public string $cpf;
 }
 
 interface ClientesDAOInterface
@@ -16,4 +16,5 @@ interface ClientesDAOInterface
     public function update(Cliente $data);
     public function del($id);
     public function clienteToArray(Cliente $data);
+    public function totalCliente();
 }
