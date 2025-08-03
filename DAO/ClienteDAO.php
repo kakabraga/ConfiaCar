@@ -37,9 +37,9 @@ class ClienteDAO implements ClientesDAOInterface
         $stmt->execute();
         $result = $stmt->fetchAll();
         $dados = [];
-        
+
         if ($stmt->rowCount() > 0) {
-            foreach($result as $row) {
+            foreach ($result as $row) {
                 $dados[] = $this->buildCliente($row);
             }
             return $dados;
@@ -55,7 +55,7 @@ class ClienteDAO implements ClientesDAOInterface
         $stmt->bindParam(":email", $data->email);
         $stmt->bindParam(":cpf", $data->cpf);
         $resultado = $stmt->execute();
-        
+
         return $resultado ? true : false;
     }
     public function del($id)
@@ -67,13 +67,20 @@ class ClienteDAO implements ClientesDAOInterface
     }
     public function clienteToArray(Cliente $data)
     {
-            $array_data = [
-                'id' => $data->id,
-                'nome' => $data->nome,
-                'email' => $data->email,
-                'cpf' => $data->cpf
-            ];
-            return $array_data;
-        }
-    
+        $array_data = [
+            'id' => $data->id,
+            'nome' => $data->nome,
+            'email' => $data->email,
+            'cpf' => $data->cpf
+        ];
+        return $array_data;
+    }
+
+    public function totalCliente() {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM tb_cliente");
+        $stmt->execute();
+        $total = $stmt->fetchColumn();
+
+        return (int) $total;
+    }
 }
